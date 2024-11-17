@@ -61,6 +61,23 @@ docker ps -a
 docker logs <id_of_the_stopped_container>
 ```
 
+## Contribution
+
+- Create a new branch for the feature
+
+```
+git branch -b new-feature-name
+```
+- Push your changes to a remote branch
+
+```
+git push origin new-feature-name
+```
+
+- Create a PR (Pull Request)
+  - Go to Github.com and select the branch you just push
+  - Click on *Contribute*, then click *Open Pull Request*
+
 ## Managing Secrets and Environment Variables
 
 - For production environments, use Docker secrets:

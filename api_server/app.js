@@ -25,6 +25,7 @@ const swaggerUiOptions = {
 };
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfigs, swaggerUiOptions));
 
+
 // connect to the database and start the web server
 postgresDB()
     .then(() => {

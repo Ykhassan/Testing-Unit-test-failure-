@@ -26,5 +26,5 @@ CREATE TABLE "Projects" (
   "durability" numeric(12,2),
   "cloud_provider" varchar,
   "commit_count" integer,
-  FOREIGN KEY ("owner_id") REFERENCES "users" ("user_id")
+  FOREIGN KEY ("owner_id") REFERENCES "Users" ("user_id")
 );

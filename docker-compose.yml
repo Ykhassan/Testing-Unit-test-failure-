@@ -4,10 +4,9 @@ services:
   db:
     image: postgres:16.4-alpine
     container_name: postgres_container
-    hostname: postgres16
-    env_file:
-      - .env
+    hostname: ${POSTGRES_HOST}
     environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
@@ -16,7 +15,7 @@ services:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     restart: unless-stopped
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data       
       - ./db_init_scripts:/docker-entrypoint-initdb.d
     networks:
       - app_network
@@ -28,11 +27,9 @@ services:
   
   pgadmin:
     image: dpage/pgadmin4:8.11.0
-    env_file:
-      - .env
     container_name: pgadmin_container
     environment:
-      - POSTGRES_HOST=postgres16
+      - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -62,8 +59,6 @@ services:
         PORT: ${API_SERVER_PORT}
     env_file:
       - .env
-    environment:
-      - POSTGRES_HOST=postgres16
     image: api_server_image
     container_name: api_server_container
     ports:
