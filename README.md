@@ -1,24 +1,13 @@
-# Full Stack Dockerized Web Application Template (React, Node.js, PostgreSQL, and pgAdmin)
-
-This project provides a starter template for a full stack web application using Docker Compose. It uses React, Node.js, PostgreSQL, and pgAdmin, offering a complete development environment.
-
- #### Features
-
-- React frontend
-- Node.js backend API server
-- PostgreSQL database
-- pgAdmin for database management
-- Database initialization scripts
-- Docker Compose
+# Project CD-Hub
 
 ## Services
 
-| Service            | URL                                 |
-|--------------------|-------------------------------------|
-| PostgreSQL         | `postgres://localhost:5432`         |
-| pgAdmin            | `http://localhost:5050`             |
-| React App          | `http://localhost:3000`             |
-| Express API Server | `http://localhost:4000/health`      |
+| Service            | URL                                     |
+|--------------------|-----------------------------------------|
+| PostgreSQL         | `postgres://localhost:5432`             |
+| pgAdmin            | `http://localhost:5050`                 |
+| React App          | `http://localhost:3000`                 |
+| Express API Server | `http://localhost:4000/api/health`      |
 
 ## Usage
 
