@@ -1,11 +1,21 @@
 import User from './User.js';
 import Project from './Project.js';
+import Tag from './Tag.js';
+import Connection from './Connection.js';
 
 // Associations
-Project.belongsTo(User, { foreignKey: 'owner_id', targetKey: 'user_id' });
-User.hasMany(Project, { foreignKey: 'owner_id', sourceKey: 'user_id' });
+User.hasMany(Connection);
+Connection.belongsTo(User);
+
+User.hasMany(Project, { foreignKey: 'user_id'});
+Project.belongsTo(User, { foreignKey: 'user_id'});
+
+Project.belongsToMany(Tag, {through: 'ProjectTags'})
+Tag.belongsToMany(Project, {through: 'ProjectTags'})
 
 export {
     User,
-    Project
+    Connection,
+    Project,
+    Tag
 };

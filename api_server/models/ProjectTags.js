@@ -5,36 +5,35 @@ import { DataTypes } from "sequelize";
  * @swagger
  * components:
  *   schemas:
- *     Tag:
+ *     ProjectTags:
  *       type: object
  *       properties:
+ *         project_id:
+ *           type: integer
+ *           description: The unique identifier for the project.
  *         tag_id:
  *           type: integer
  *           description: The unique identifier for the tag.
- *         name:
- *           type: string
- *           description: The name of the tag.
  *       required:
+ *         - project_id
  *         - tag_id
- *         - name
  *       example:
+ *         project_id: 1
  *         tag_id: 1
- *         name: "Technology"
  */
-const Tag = sequelize.define('Tag', {
+const ProjectTags = sequelize.define('ProjectTags', {
+    project_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    },
     tag_id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
+        primaryKey: true
     },
 }, {
-    tableName: 'Tags',
+    tableName: 'Projects_tags',
     schema: 'public',
     timestamps: true
 });
 
-export default Tag;
+export default ProjectTags;

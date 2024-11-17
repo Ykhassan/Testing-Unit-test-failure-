@@ -1,15 +1,39 @@
--- Insert statements for the "Users" table
-INSERT INTO "Users" ("user_id", "username", "fullname", "email", "profile_img_url", "last_login", "created_at", "bio", "is_active") VALUES
-('u1', 'jdoe', 'John Doe', 'jdoe@example.com', 'http://example.com/img1.jpg', '2024-11-16 12:00:00', '2024-11-16 09:00:00', 'Bio for John Doe', true),
-('u2', 'asmith', 'Alice Smith', 'asmith@example.com', 'http://example.com/img2.jpg', '2024-11-16 13:00:00', '2024-11-16 10:00:00', 'Bio for Alice Smith', true),
-('u3', 'bjohnson', 'Bob Johnson', 'bjohnson@example.com', 'http://example.com/img3.jpg', '2024-11-16 14:00:00', '2024-11-16 11:00:00', 'Bio for Bob Johnson', false),
-('u4', 'cmiller', 'Carol Miller', 'cmiller@example.com', 'http://example.com/img4.jpg', '2024-11-16 15:00:00', '2024-11-16 12:00:00', 'Bio for Carol Miller', true),
-('u5', 'dlee', 'David Lee', 'dlee@example.com', 'http://example.com/img5.jpg', '2024-11-16 16:00:00', '2024-11-16 13:00:00', 'Bio for David Lee', false);
+-- Insert statements for "Users" table
+INSERT INTO "Users" ("user_id", "username", "fullname", "email", "profile_img_url", "bio") VALUES
+('user_1', 'john_doe', 'John Doe', 'john.doe@example.com', 'https://azureblobstorage.com/john_doe.jpg', 'Software Developer at XYZ Corp.'),
+('user_2', 'alice_smith', 'Alice Smith', 'alice.smith@example.com', 'https://azureblobstorage.com/alice_smith.jpg', 'Cloud Architect at ABC Inc.'),
+('user_3', 'bob_jones', 'Bob Jones', 'bob.jones@example.com', 'https://azureblobstorage.com/bob_jones.jpg', 'DevOps Engineer at DEF Ltd.'),
+('user_4', 'carol_white', 'Carol White', 'carol.white@example.com', 'https://azureblobstorage.com/carol_white.jpg', 'Data Scientist at GHI Co.'),
+('user_5', 'david_lee', 'David Lee', 'david.lee@example.com', 'https://azureblobstorage.com/david_lee.jpg', 'Full Stack Developer at JKL LLC.');
 
--- Insert statements for the "Projects" table
-INSERT INTO "Projects" ("name", "description", "owner_id", "visibility", "created_at", "last_updated", "estimated_cost", "like_count", "clone_count", "blob_url", "availability", "durability", "cloud_provider", "commit_count") VALUES
-('Project Alpha', 'Description for Project Alpha', 'u1', 'public', '2024-11-16 12:00:00', '2024-11-16 13:00:00', 1000.00, 10, 5, 'http://example.com/blob1', 99.99, 99.99, 'AWS', 50),
-('Project Beta', 'Description for Project Beta', 'u2', 'private', '2024-11-16 14:00:00', '2024-11-16 15:00:00', 2000.00, 20, 10, 'http://example.com/blob2', 99.98, 99.98, 'Azure', 100),
-('Project Gamma', 'Description for Project Gamma', 'u3', 'public', '2024-11-16 16:00:00', '2024-11-16 17:00:00', 3000.00, 30, 15, 'http://example.com/blob3', 99.97, 99.97, 'GCP', 150),
-('Project Delta', 'Description for Project Delta', 'u4', 'private', '2024-11-16 18:00:00', '2024-11-16 19:00:00', 4000.00, 40, 20, 'http://example.com/blob4', 99.96, 99.96, 'AWS', 200),
-('Project Epsilon', 'Description for Project Epsilon', 'u5', 'public', '2024-11-16 20:00:00', '2024-11-16 21:00:00', 5000.00, 50, 25, 'http://example.com/blob5', 99.95, 99.95, 'Azure', 250);
+-- Insert statements for "Connections" table
+INSERT INTO "Connections" ("user_id", "name", "cloud_provider", "status", "details") VALUES
+('user_1', 'AWS Connection', 'AWS', 'active', '{"region": "us-west-1"}'),
+('user_2', 'Azure Connection', 'Azure', 'active', '{"region": "east-us"}'),
+('user_3', 'GCP Connection', 'GCP', 'inactive', '{"region": "europe-west1"}'),
+('user_4', 'AWS Connection', 'AWS', 'active', '{"region": "us-east-1"}'),
+('user_5', 'Azure Connection', 'Azure', 'inactive', '{"region": "west-europe"}');
+
+-- Insert statements for "Projects" table
+INSERT INTO "Projects" ("user_id", "name", "description", "visibility", "estimated_cost", "availability", "durability", "cloud_provider", "like_count", "blob_url") VALUES
+('user_1', 'Microservices Architecture', 'A project to implement a microservices architecture.', 'public', 5000.00, 99.99, 95.00, 'AWS', 100, 'https://azureblobstorage.com/microservices.jpg'),
+('user_2', 'Serverless Architecture', 'A project to implement a serverless architecture.', 'private', 3000.00, 99.95, 90.00, 'Azure', 80, 'https://azureblobstorage.com/serverless.jpg'),
+('user_3', '3-Tier Architecture', 'A project to implement a 3-tier architecture.', 'public', 7000.00, 99.90, 85.00, 'GCP', 120, 'https://azureblobstorage.com/3tier.jpg'),
+('user_4', 'Dockerized Application', 'A project to containerize an application using Docker.', 'private', 4000.00, 99.85, 80.00, 'AWS', 90, 'https://azureblobstorage.com/docker.jpg'),
+('user_5', 'Kubernetes Deployment', 'A project to deploy an application on Kubernetes.', 'public', 6000.00, 99.80, 75.00, 'Azure', 110, 'https://azureblobstorage.com/kubernetes.jpg');
+
+-- Insert statements for "Tags" table
+INSERT INTO "Tags" ("name") VALUES
+('Microservices'),
+('Serverless'),
+('3-Tier'),
+('Docker'),
+('Kubernetes');
+
+-- Insert statements for "Projects_tags" table
+INSERT INTO "Projects_tags" ("project_id", "tag_id") VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);

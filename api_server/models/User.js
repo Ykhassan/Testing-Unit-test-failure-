@@ -23,16 +23,17 @@ import { DataTypes } from "sequelize";
  *         profile_img_url:
  *           type: string
  *           description: The URL of the user's profile image
- *         last_login:
- *           type: string
- *           format: date-time
- *           description: The last login date and time of the user
  *         bio:
  *           type: string
  *           description: The biography of the user
- *         is_active:
- *           type: boolean
- *           description: Indicates whether the user is active
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date and time when the user was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date and time when the user was last updated
  *       required:
  *         - user_id
  *         - username
@@ -44,49 +45,38 @@ import { DataTypes } from "sequelize";
  *         fullname: "John Doe"
  *         email: "johndoe@example.com"
  *         profile_img_url: "http://example.com/profile.jpg"
- *         last_login: "2023-10-01T12:34:56Z"
  *         bio: "Software developer with 10 years of experience."
- *         is_active: true
+ *         createdAt: "2023-10-01T12:34:56Z"
+ *         updatedAt: "2023-10-01T12:34:56Z"
  */
 const User = sequelize.define('User', {
     user_id: {
         type: DataTypes.STRING(255),
-        primaryKey: true,
+        primaryKey: true
     },
     username: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
     fullname: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: false
     },
     email: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        unique: true,
+        type: DataTypes.STRING,
+        allowNull: false
     },
     profile_img_url: {
-        type: DataTypes.TEXT,
-    },
-    last_login: {
-        type: DataTypes.DATE,
+        type: DataTypes.TEXT
     },
     bio: {
-        type: DataTypes.TEXT,
-    },
-    is_active: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-    },
-},
-    {
-        tableName: 'Users',
-        schema: 'public',
-        timestamps: true,
-        updatedAt: false,
-        createdAt: "created_at",
-    });
+        type: DataTypes.TEXT
+    }
+}, {
+    tableName: 'Users',
+    schema: 'public',
+    timestamps: true
+});
 
 export default User;
