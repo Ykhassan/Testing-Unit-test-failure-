@@ -55,18 +55,15 @@ services:
       - app_network
 
   api_server:
-    environment:
-      - API_SERVER_PORT=${API_SERVER_PORT}
-      - POSTGRES_HOST=postgres16
-      - POSTGRES_PORT=${POSTGRES_PORT}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     build:
       context: api_server
       dockerfile: Dockerfile
       args:
         PORT: ${API_SERVER_PORT}
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=postgres16
     image: api_server_image
     container_name: api_server_container
     ports:

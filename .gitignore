@@ -38,3 +38,5 @@ env/
 venv/
 ENV/
 
+# log files
+*.log
