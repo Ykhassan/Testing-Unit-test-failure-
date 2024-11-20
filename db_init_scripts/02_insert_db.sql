@@ -37,3 +37,9 @@ INSERT INTO "Projects_tags" ("project_id", "tag_id") VALUES
 (3, 3),
 (4, 4),
 (5, 5);
+
+-- Insert statements for "Clones" table
+INSERT INTO "Clones" ("project_id", "parent_project_id") VALUES
+(2, 1),
+(3, 1),
+(4, 1);

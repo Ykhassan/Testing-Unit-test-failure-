@@ -43,28 +43,27 @@ import { DataTypes } from "sequelize";
  *         updatedAt: "2023-10-01T12:34:56Z"
  */
 
-const Branch = sequelize.define('Branch',{ 
-    branch_id:{
+const Branch = sequelize.define('Branch', {
+    branch_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    project_id:{
+    project_id: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    name:{
-        type: DataTypes.STRING(255),
+    name: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    last_modified:{
+    last_modified: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
-
     }
- },
+},
     {
-        tableName: 'Branch',
+        tableName: 'Branches',
         schema: 'public',
         timestamps: true
     }
