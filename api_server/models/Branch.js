@@ -64,7 +64,7 @@ const Branch = sequelize.define('Branch',{
     }
  },
     {
-        tableName: 'Branch',
+        tableName: 'Branches',
         schema: 'public',
         timestamps: true
     }

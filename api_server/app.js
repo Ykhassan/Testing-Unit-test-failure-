@@ -31,6 +31,7 @@ postgresDB()
     .then(() => {
         app.listen(port, () => {
             console.log(`The API server is listening on port ${port}`)
+
         })
     }).catch((err) => {
         console.error('Unable to connect to the database:', err);

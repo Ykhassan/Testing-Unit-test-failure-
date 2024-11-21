@@ -37,3 +37,30 @@ INSERT INTO "Projects_tags" ("project_id", "tag_id") VALUES
 (3, 3),
 (4, 4),
 (5, 5);
+
+INSERT INTO "Deployments" ("user_id", "project_id", "status", "cloud_provider", "version", "total_duration", "connection_id") VALUES
+('user_1', 1, 'In Progress', 'AWS', 'v1.0', '5 hours', 1),
+('user_2', 2, 'Completed', 'Azure', 'v2.1', '2 hours 30 minutes', 2),
+('user_3', 3, 'Failed', 'GCP', 'v3.5', '1 hour 15 minutes', 3),
+('user_4', 4, 'In Progress', 'AWS', 'v1.2', '6 hours 45 minutes', 4),
+('user_5', 5, 'Completed', 'DigitalOcean', 'v4.0', '3 hours', 5);
+
+INSERT INTO "Comments" ("user_id", "content", "up_votes", "down_votes", "last_modified") VALUES
+('user_1', 'This is a great post!', 15, 2, '2024-11-21 10:00:00'),
+('user_2', 'I completely disagree with this.', 5, 20, '2024-11-21 11:30:00'),
+('user_3', 'Could you elaborate more on this topic?', 8, 1, '2024-11-21 12:15:00'),
+('user_4', 'Thanks for sharing!', 12, 0, '2024-11-21 13:45:00'),
+('user_5', 'This information is outdated.', 3, 6, '2024-11-21 14:20:00');
+
+INSERT INTO "Issues" ("user_id", "project_id", "title", "description", "status", "closed_at") VALUES
+('user_1', 1, 'Login Bug', 'Users are unable to log in to the system.', 'open', NULL),
+('user_2', 2, 'UI Improvement', 'Update the project dashboard UI for better usability.', 'in-progress', NULL),
+('user_3', 3, 'API Error', 'Error 500 occurs when fetching project details.', 'resolved', '2024-11-01 10:30:00'),
+('user_4', 4, 'Database Optimization', 'Optimize the database queries for faster response times.', 'open', NULL),
+('user_5', 5, 'Feature Request', 'Add a dark mode option for the application.', 'closed', '2024-10-15 14:45:00');
+
+
+INSERT INTO "Projects_comments" ("project_id", "comment_id") VALUES
+(1,6),
+(1,7),
+(1,8);

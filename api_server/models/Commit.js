@@ -84,7 +84,7 @@ const Commit = sequelize.define('Commit',{
     }
  },
     {
-        tableName: 'Commit',
+        tableName: 'Commits',
         schema: 'public',
         timestamps: true
     }

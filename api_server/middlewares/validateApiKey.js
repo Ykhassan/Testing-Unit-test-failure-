@@ -1,11 +1,12 @@
 const validateApiKey = (req, res, next) => {
     const authHeader = req.headers.authorization
-
+    console.log(authHeader)
     if (!authHeader) {
         return res.status(401).json({ error: 'Authorization header is missing' })
     }
 
     const [type, apiKey] = authHeader.split(' ')
+    console.log(authHeader)
 
     if (type !== 'Bearer' || !apiKey) {
         return res.status(401).json({

@@ -126,7 +126,7 @@ CREATE TABLE "Issues" (
 );
 
 CREATE TABLE "Replies" (
-  "comment_id" serial,
+  "comment_id" serial UNIQUE,
   "parent_comment_id" serial,
   "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

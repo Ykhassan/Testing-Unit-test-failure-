@@ -64,7 +64,7 @@ const Collaborator = sequelize.define('Collaborator',{
     }
  },
     {
-        tableName: 'Collaborator',
+        tableName: 'Collaborators',
         schema: 'public',
         timestamps: true
     }
