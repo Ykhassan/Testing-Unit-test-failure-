@@ -136,13 +136,13 @@ CREATE TABLE "Replies" (
 );
 
 CREATE TABLE "Clones" (
-  "project_id" serial,
-  "clone_id" serial,
+  "project_id" serial UNIQUE,
+  "parent_project_id" serial,
   "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY ("project_id", "clone_id"),
+  PRIMARY KEY ("project_id", "parent_project_id"),
   FOREIGN KEY ("project_id") REFERENCES "Projects" ("project_id"),
-  FOREIGN KEY ("clone_id") REFERENCES "Projects" ("project_id")
+  FOREIGN KEY ("parent_project_id") REFERENCES "Projects" ("project_id")
 );
 
 CREATE TABLE "Projects_tags" (
@@ -157,7 +157,7 @@ CREATE TABLE "Projects_tags" (
 
 CREATE TABLE "Issues_comments" (
   "issue_id" serial,
-  "comment_id" serial,
+  "comment_id" serial UNIQUE,
   "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY ("issue_id", "comment_id"),
@@ -167,7 +167,7 @@ CREATE TABLE "Issues_comments" (
 
 CREATE TABLE "Projects_comments" (
   "project_id" serial,
-  "comment_id" serial,
+  "comment_id" serial UNIQUE,
   "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY ("project_id", "comment_id"),

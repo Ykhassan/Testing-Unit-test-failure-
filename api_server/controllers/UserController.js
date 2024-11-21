@@ -1,5 +1,4 @@
 import { User } from '../models/index.js';
-
 const UserController = {
     /**
      * @swagger

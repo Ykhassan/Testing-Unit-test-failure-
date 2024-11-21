@@ -38,6 +38,7 @@ INSERT INTO "Projects_tags" ("project_id", "tag_id") VALUES
 (4, 4),
 (5, 5);
 
+-- Insert statements for "Deployments" table
 INSERT INTO "Deployments" ("user_id", "project_id", "status", "cloud_provider", "version", "total_duration", "connection_id") VALUES
 ('user_1', 1, 'In Progress', 'AWS', 'v1.0', '5 hours', 1),
 ('user_2', 2, 'Completed', 'Azure', 'v2.1', '2 hours 30 minutes', 2),
@@ -45,6 +46,7 @@ INSERT INTO "Deployments" ("user_id", "project_id", "status", "cloud_provider", 
 ('user_4', 4, 'In Progress', 'AWS', 'v1.2', '6 hours 45 minutes', 4),
 ('user_5', 5, 'Completed', 'DigitalOcean', 'v4.0', '3 hours', 5);
 
+-- Insert statements for "Comments" table
 INSERT INTO "Comments" ("user_id", "content", "up_votes", "down_votes", "last_modified") VALUES
 ('user_1', 'This is a great post!', 15, 2, '2024-11-21 10:00:00'),
 ('user_2', 'I completely disagree with this.', 5, 20, '2024-11-21 11:30:00'),
@@ -52,6 +54,7 @@ INSERT INTO "Comments" ("user_id", "content", "up_votes", "down_votes", "last_mo
 ('user_4', 'Thanks for sharing!', 12, 0, '2024-11-21 13:45:00'),
 ('user_5', 'This information is outdated.', 3, 6, '2024-11-21 14:20:00');
 
+-- Insert statements for "Issues" table
 INSERT INTO "Issues" ("user_id", "project_id", "title", "description", "status", "closed_at") VALUES
 ('user_1', 1, 'Login Bug', 'Users are unable to log in to the system.', 'open', NULL),
 ('user_2', 2, 'UI Improvement', 'Update the project dashboard UI for better usability.', 'in-progress', NULL),
@@ -59,8 +62,13 @@ INSERT INTO "Issues" ("user_id", "project_id", "title", "description", "status",
 ('user_4', 4, 'Database Optimization', 'Optimize the database queries for faster response times.', 'open', NULL),
 ('user_5', 5, 'Feature Request', 'Add a dark mode option for the application.', 'closed', '2024-10-15 14:45:00');
 
-
+-- Insert statements for "Projects_comments" table
 INSERT INTO "Projects_comments" ("project_id", "comment_id") VALUES
 (1,6),
 (1,7),
 (1,8);
+-- Insert statements for "Clones" table
+INSERT INTO "Clones" ("project_id", "parent_project_id") VALUES
+(2, 1),
+(3, 1),
+(4, 1);

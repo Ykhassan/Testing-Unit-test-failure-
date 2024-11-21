@@ -35,10 +35,13 @@ import { DataTypes } from "sequelize";
 const IssueComments = sequelize.define('IssueComments', 
     {
         issue_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            primaryKey: true
         },
         comment_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true
         }
     },
     {

@@ -56,33 +56,33 @@ import { DataTypes } from "sequelize";
  *         updatedAt: "2023-10-01T12:34:56Z"
  */
 
-const Commit = sequelize.define('Commit',{ 
-    commit_id:{
+const Commit = sequelize.define('Commit', {
+    commit_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    user_id:{
-        type: DataTypes.STRING(255),
+    user_id: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    branch_id:{
+    branch_id: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
     role: {
-        type: DataTypes.STRING(255)
+        type: DataTypes.STRING
     },
-    msg:{
+    msg: {
         type: DataTypes.TEXT
     },
-    hash:{
+    hash: {
         type: DataTypes.TEXT
     },
     url: {
         type: DataTypes.TEXT
     }
- },
+},
     {
         tableName: 'Commits',
         schema: 'public',

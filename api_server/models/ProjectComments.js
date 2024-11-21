@@ -39,7 +39,9 @@ const ProjectComments = sequelize.define('ProjectComments',
             type: DataTypes.INTEGER
         },
         comment_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true
         }
     },
     {

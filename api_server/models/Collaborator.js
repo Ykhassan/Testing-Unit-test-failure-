@@ -47,22 +47,22 @@ import { DataTypes } from "sequelize";
  *         updatedAt: "2023-10-01T12:34:56Z"
  */
 
-const Collaborator = sequelize.define('Collaborator',{ 
-    user_id:{
+const Collaborator = sequelize.define('Collaborator', {
+    user_id: {
         type: DataTypes.STRING(255),
         primaryKey: true
     },
-    branch_id:{
+    branch_id: {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    role:{
-        type: DataTypes.STRING(255)
+    role: {
+        type: DataTypes.STRING
     },
-    permissions:{
+    permissions: {
         type: DataTypes.JSONB
     }
- },
+},
     {
         tableName: 'Collaborators',
         schema: 'public',
