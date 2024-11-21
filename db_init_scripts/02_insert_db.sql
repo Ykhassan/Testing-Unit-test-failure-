@@ -54,6 +54,12 @@ INSERT INTO "Comments" ("user_id", "content", "up_votes", "down_votes", "last_mo
 ('user_4', 'Thanks for sharing!', 12, 0, '2024-11-21 13:45:00'),
 ('user_5', 'This information is outdated.', 3, 6, '2024-11-21 14:20:00');
 
+-- Insert statements for "Replies" table
+INSERT INTO "Replies" ("comment_id", "parent_comment_id") VALUES
+(2,1),
+(3,1),
+(4,5);
+
 -- Insert statements for "Issues" table
 INSERT INTO "Issues" ("user_id", "project_id", "title", "description", "status", "closed_at") VALUES
 ('user_1', 1, 'Login Bug', 'Users are unable to log in to the system.', 'open', NULL),
@@ -64,11 +70,40 @@ INSERT INTO "Issues" ("user_id", "project_id", "title", "description", "status",
 
 -- Insert statements for "Projects_comments" table
 INSERT INTO "Projects_comments" ("project_id", "comment_id") VALUES
-(1,6),
-(1,7),
-(1,8);
+(1,3),
+(1,4),
+(1,5);
+
+-- Insert statements for "Issues_comments" table
+INSERT INTO "Issues_comments" ("issue_id", "comment_id") VALUES
+(4,2),
+(2,5),
+(1,4);
+
 -- Insert statements for "Clones" table
 INSERT INTO "Clones" ("project_id", "parent_project_id") VALUES
 (2, 1),
 (3, 1),
 (4, 1);
+
+-- Insert statements for "Branches table"
+INSERT INTO "Branches" ("project_id", "name") VALUES
+(1,'main'),
+(1,'dev'),
+(2,'main'),
+(4,'feature_1'),
+(4,'feature_2');
+
+-- Insert statements for "Commits" table"
+INSERT INTO "Commits" ("user_id", "branch_id", "msg", "hash", "url") VALUES
+('user_1', 2, 'first push in dev', '$2y$04$HUvOaowCBG3fg9O/vM.OLuPav/FWDLYI1A8nUQReHULwey4qh3go.', 'https://cloudhub.com/yasser/cdhub/dev'),
+('user_1', 1, 'merge with main', '$2y$04$SZ.rBzdVOqQNdFOFUZz6IOBcmt58ctdFqO105pGDC/zhkg/3ghUzq', 'https://cloudhub.com/yasser/cdhub/main'),
+('user_3', 3, 'html code', '$2y$04$0PQGUK2lspf90g1Pc388xuKE5oOAiPaldIN4VXZlUfjdPkmcCDkMC', 'https://cloudhub.com/ahmed/testinghtml/main'),
+('user_4', 4, 'feature 1 almost complete', '$2y$04$r3SoouND.qAI9mra02wJ0e1ZKk8wNmRw7rmOz.MqMseiMjg55eddy', 'https://cloudhub.com/coder123/erpsys/feature_1'),
+('user_2', 2, 'second commit', '$2y$04$NE2WoYABku3gyV8luCWEceQH3lNHJGNSUKyfomhQSlMyCq3ClxM8y', 'https://cloudhub.com/yasser/cdhub/dev');
+
+-- Insert statements for "Collaborators" table"
+INSERT INTO "Collaborators" ("user_id", "branch_id", "role", "permissions") VALUES
+('user_2', 2, 'bug-tester', '{"edit_mode": "read-only"}'),
+('user_5', 2, 'admin', '{"edit_mode": "edit"}'),
+('user_1', 3, 'supervisor', '{"edit_mode": "read-only"}');
