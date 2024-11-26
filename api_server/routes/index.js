@@ -1,4 +1,11 @@
 import UserRoutes from './UserRoutes.js';
+import ConnectionRoutes from './ConnectionRoutes.js';
+import SearchRoutes from './SearchRoutes.js';
+import ProjectRoutes from './ProjectRoutes.js';
+import FileRoutes from './FileRoutes.js';
+import DeploymentRoutes from './DeploymentRoutes.js';
+import IssueRoutes from './IssueRoutes.js';
+import CommentRoutes from './CommentRoutes.js';
 
 
 /**
@@ -34,6 +41,13 @@ const apiRoutes = (router) => {
         res.status(200).json({ status: 'Healthy' });
     });
     router.use('/users', UserRoutes)
+    router.use('/connections', ConnectionRoutes)
+    router.use('/search', SearchRoutes)
+    router.use('/projects', ProjectRoutes)
+    router.use('/files', FileRoutes)
+    router.use('/deployments', DeploymentRoutes)
+    router.use('/issues', IssueRoutes)
+    router.use('/comments', CommentRoutes)
 
     // Middleware to catch 404 errors
     router.use((req, res, next) => {
