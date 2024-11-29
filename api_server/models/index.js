@@ -17,8 +17,8 @@ import Deployment from './Deployment.js';
 // Associations
 
 // User has many Connections
-User.hasMany(Connection);
-Connection.belongsTo(User);
+User.hasMany(Connection, { foreignKey: 'user_id'});
+Connection.belongsTo(User, { foreignKey: 'user_id'});
 
 // User has many Projects
 User.hasMany(Project, { foreignKey: 'user_id'});

@@ -27,8 +27,8 @@ const UserController = {
      */
     async createUser(req, res) {
         try {
-            const { id, user_name, first_name, last_name } = req.body;
-            const newUser = await User.create({ id, user_name, first_name, last_name });
+            const { user_id, username, fullname, email } = req.body;
+            const newUser = await User.create({ user_id, username, fullname, email });
             res.status(201).json(newUser);
         } catch (error) {
             res.status(400).json({ message: "Error creating user", error: error.message });
@@ -67,7 +67,7 @@ const UserController = {
 
     /**
      * @swagger
-     * /users/{id}:
+     * /users/{user_id}:
      *   get:
      *     security:
      *       - bearerAuth: []
@@ -76,7 +76,7 @@ const UserController = {
      *     tags: [Users]
      *     parameters:
      *       - in: path
-     *         name: id
+     *         name: user_id
      *         required: true
      *         schema:
      *           type: string
@@ -93,7 +93,7 @@ const UserController = {
      */
     async getUserById(req, res) {
         try {
-            const user = await User.findByPk(req.params.id);
+            const user = await User.findByPk(req.params.user_id);
             if (user) {
                 res.status(200).json(user);
             } else {
@@ -106,7 +106,7 @@ const UserController = {
 
     /**
      * @swagger
-     * /users/{id}:
+     * /users/{user_id}:
      *   put:
      *     security:
      *       - bearerAuth: []
@@ -115,7 +115,7 @@ const UserController = {
      *     tags: [Users]
      *     parameters:
      *       - in: path
-     *         name: id
+     *         name: user_id
      *         required: true
      *         schema:
      *           type: string
@@ -140,11 +140,18 @@ const UserController = {
      */
     async updateUser(req, res) {
         try {
+            // Check if the authenticated user is the same to whom he wants to update
+            // if (!req.user) {
+            //     return res.status(401).json({ message: "User not authenticated" });
+            // }
+            // if (req.user.user_id !== req.params.user_id) {
+            //     return res.status(403).json({ message: "You are not authorized to update this user" });
+            // }
             const [updated] = await User.update(req.body, {
-                where: { id: req.params.id }
+                where: { user_id: req.params.user_id }
             });
             if (updated) {
-                const updatedUser = await User.findByPk(req.params.id);
+                const updatedUser = await User.findByPk(req.params.user_id);
                 res.status(200).json(updatedUser);
             } else {
                 res.status(404).json({ message: "User not found" });
@@ -178,8 +185,15 @@ const UserController = {
      */
     async deleteUser(req, res) {
         try {
+            // Check if the authenticated user is the same to whom he wants to delete
+            // if (!req.user) {
+            //     return res.status(401).json({ message: "User not authenticated" });
+            // }
+            // if (req.user.user_id !== req.params.user_id) {
+            //     return res.status(403).json({ message: "You are not authorized to delete this user" });
+            // }
             const deleted = await User.destroy({
-                where: { id: req.params.id }
+                where: { user_id: req.params.user_id }
             });
             if (deleted) {
                 res.status(204).send("User deleted");
