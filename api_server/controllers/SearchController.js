@@ -15,7 +15,7 @@ const SearchController = {
      *         name: q
      *         schema:
      *           type: string
-     *         required: false
+     *         required: true
      *         description: The search keyword to filter projects by name
      *     responses:
      *       200:
@@ -26,18 +26,21 @@ const SearchController = {
      *               type: array
      *               items:
      *                 $ref: '#/components/schemas/Project'
+     *       400:
+     *         description: Missing search query
      *       500:
      *         description: Error searching projects
      */
     async searchProjects(req, res) {
-        // Access query parameters
-        let { q } = req.query;
-        q = q.trim().toLowerCase();
-
         try {
+            // Access query parameters
+            let { q } = req.query;
+            if (!q) {
+                return res.status(400).json({ message: "Missing search query" });
+            }
             const projects = await Project.findAll({
                 where: {
-                    ...(q && { name: { [Op.like]: `%${q}%` } }),
+                    ...(q && { name: { [Op.iLike]: `%${q}%` } }),
                     visibility: "public"
                 },
                 // attributes: { exclude: ["blob_url"] },
@@ -59,11 +62,11 @@ const SearchController = {
      *     tags: [Search]
      *     parameters:
      *       - in: query
-     *         name: username
+     *         name: q
      *         schema:
      *           type: string
-     *         required: false
-     *         description: The search keyword to filter users by name
+     *         required: true
+     *         description: The search keyword to filter users by username or full name
      *     responses:
      *       200:
      *         description: A list of users that match the search criteria
@@ -73,18 +76,26 @@ const SearchController = {
      *               type: array
      *               items:
      *                 $ref: '#/components/schemas/User'
+     *       400:
+     *         description: Missing search query
      *       500:
      *         description: Error searching users
      */
     async searchUsers(req, res) {
-        // Access query parameters
-        let { username } = req.query;
-        username = username.trim().toLowerCase();
-
         try {
+            // Access query parameters
+            let { q } = req.query;
+            if (!q) {
+                return res.status(400).json({ message: "Missing search query" });
+            }
             const users = await User.findAll({
                 where: {
-                    ...(username && { username: { [Op.like]: `%${username}%` } }),
+                    ...(q && {
+                        [Op.or]: [
+                            { username: { [Op.iLike]: `%${q}%` } },
+                            { fullname: { [Op.iLike]: `%${q}%` } }
+                        ]
+                    }),
                 }
             });
 
