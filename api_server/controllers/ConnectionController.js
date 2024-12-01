@@ -43,7 +43,8 @@ const ConnectionController = {
             // if (req.user.user_id !== req.params.user_id) {
             //     return res.status(403).json({ message: "You are not authorized to create a connection" });
             // }
-            const { user_id, name, cloud_provider,  status, details } = req.body;
+            const user_id = req.params.user_id;
+            const { name, cloud_provider,  status, details } = req.body;
             const newConnection = await Connection.create({ user_id, name, cloud_provider,  status, details });
             res.status(201).json(newConnection);
         } catch (error) {
@@ -143,7 +144,7 @@ const ConnectionController = {
             //     return res.status(403).json({ message: "You are not authorized to get a connection" });
             // }
             // [DANGER] if not {if (req.user.user_id !== req.params.user_id)}, any user can fetch any connection, we can use findOne with where clause
-            const connection = await Connection.findByPk(req.params.connection_id);
+            const connection = await Connection.findOne({ where: { user_id: req.params.user_id, connection_id: req.params.connection_id } });
             if (connection) {
                 res.status(200).json(connection);
             } else {
