@@ -60,7 +60,7 @@ describe('ConnectionController', () => {
         expect(mockRes.json).toHaveBeenCalledWith({ message: "Error fetching connections", error: 'Fetching failed' });
     })
 
-    // // Test getting a Connection by id
+    // Test getting a Connection by id
     test('getConnectionById - success', async () => {
         const mockReq = { params: { user_id: 'u1', Connection_id: 1}};
         const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -97,7 +97,7 @@ describe('ConnectionController', () => {
         expect(mockRes.json).toHaveBeenCalledWith({ message: "Error fetching connection", error: 'Fetching failed' });
     })
 
-    // // Test update a Connection by id
+    // Test update a Connection by id
     test('updateConnection - success', async () => {
         const mockReq = { params: { user_id: 'u1', Connection_id: 1}, body: {name: 'name updated'}};
         const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -135,7 +135,7 @@ describe('ConnectionController', () => {
         expect(mockRes.json).toHaveBeenCalledWith({ message: "Error updating connection", error: 'Updating failed' });
     })
 
-    // // Test deleting a Connection by id
+    // Test deleting a Connection by id
     test('deleteConnection - success', async () => {
         const mockReq = { params: { user_id: 'u1', Connection_id: 1}};
         const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() };
