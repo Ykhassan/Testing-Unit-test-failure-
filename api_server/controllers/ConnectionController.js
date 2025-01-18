@@ -94,7 +94,7 @@ const ConnectionController = {
             const connections = await Connection.findAll({ where: { user_id: req.params.user_id } });
             res.status(200).json(connections);
         } catch (error) {
-            res.status(500).json({ message: "Error fetching connection", error: error.message });
+            res.status(500).json({ message: "Error fetching connections", error: error.message });
         }
     },
 
@@ -216,7 +216,7 @@ const ConnectionController = {
                 res.status(404).json({ message: "Connection not found" });
             }
         } catch (error) {
-            res.status(400).json({ message: "Error updating connection", error: error.message });
+            res.status(500).json({ message: "Error updating connection", error: error.message });
         }
     },
 
@@ -265,7 +265,7 @@ const ConnectionController = {
                 where: { user_id: req.params.user_id, connection_id: req.params.connection_id }
             });
             if (deleted) {
-                res.status(204).send("Connection deleted");
+                res.status(204).json({ message: "Connection deleted" });
             } else {
                 res.status(404).json({ message: "Connection not found" });
             }

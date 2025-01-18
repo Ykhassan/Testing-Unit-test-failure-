@@ -133,10 +133,10 @@ const UserController = {
      *           application/json:
      *             schema:
      *               $ref: '#/components/schemas/User'
-     *       400:
-     *         description: Bad request
      *       404:
      *         description: User not found
+     *       500:
+     *         description: Error updating user
      */
     async updateUser(req, res) {
         try {
@@ -157,7 +157,7 @@ const UserController = {
                 res.status(404).json({ message: "User not found" });
             }
         } catch (error) {
-            res.status(400).json({ message: "Error updating user", error: error.message });
+            res.status(500).json({ message: "Error updating user", error: error.message });
         }
     },
 
@@ -182,6 +182,8 @@ const UserController = {
      *         description: User deleted successfully
      *       404:
      *         description: User not found
+     *       500:
+     *         description: Error deleting user
      */
     async deleteUser(req, res) {
         try {
@@ -196,7 +198,7 @@ const UserController = {
                 where: { user_id: req.params.user_id }
             });
             if (deleted) {
-                res.status(204).send("User deleted");
+                res.status(204).json({ message: "User deleted" });
             } else {
                 res.status(404).json({ message: "User not found" });
             }

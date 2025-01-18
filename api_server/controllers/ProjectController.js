@@ -1,4 +1,4 @@
-import { Project, User } from "../models/index.js";
+import { Project } from "../models/index.js";
 
 const ProjectController = {
 /**

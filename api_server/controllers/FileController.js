@@ -76,6 +76,7 @@ const FileController= {
         //     check if he is a collaborator with permessions
         // }
         // query params :project_id 
+        // [DANGER] must see how to create a file, what to return to user...
         try{
             // fetch files blob
             const blob_url = await Project.findOne({attributes: ['blob_url'], where: {project_id: req.params.project_id}});
@@ -335,7 +336,7 @@ const FileController= {
                 // logic to fetch file by ID from blob 
                 // if (found){
                     // logic to update the file
-                    return res.status(204).send('File update');
+                    return res.status(200).json({message:'File update'});
                 // }
                 // else {
                     // return res.status(404).json({message: 'File not found'});
@@ -415,7 +416,7 @@ const FileController= {
                 // logic to fetch file by ID from blob 
                 // if (found){
                     // logic to update the file
-                    return res.status(204).send('File deleted');
+                    return res.status(204).json({message:'File deleted'});
                 // }
                 // else {
                     // return res.status(404).json({message: 'File not found'});
