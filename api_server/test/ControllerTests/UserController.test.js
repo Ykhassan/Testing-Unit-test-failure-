@@ -29,7 +29,7 @@ describe('UserController', () => {
 
         await UserController.createUser(mockReq, mockRes);
 
-        expect(mockRes.status).toHaveBeenCalledWith(400);
+        expect(mockRes.status).toHaveBeenCalledWith(500);
         expect(mockRes.json).toHaveBeenCalledWith({ message: 'Error creating user', error: 'Create failed' });
     })
 

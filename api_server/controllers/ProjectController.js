@@ -78,7 +78,7 @@ const ProjectController = {
             const blob_url = 'blob:https://example.com/123e4567-e89b-12d3-a456-426614174000'
             const { name, description, visibility, cloud_provider } = req.body
             const project = await Project.create({ user_id, name, description, visibility, blob_url, cloud_provider });
-            return res.status(200).json(project);
+            return res.status(201).json(project);
         } catch (error) {
             return res.status(500).json({ message: "Error creating project", error: error.message });
         }

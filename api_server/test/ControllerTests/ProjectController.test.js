@@ -29,7 +29,7 @@ describe('ProjectController', () => {
 
         await ProjectController.createProject(mockReq, mockRes);
 
-        expect(mockRes.status).toHaveBeenCalledWith(200);
+        expect(mockRes.status).toHaveBeenCalledWith(201);
         expect(mockRes.json).toHaveBeenCalledWith(mockProject);
     })
 

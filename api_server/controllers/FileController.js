@@ -336,7 +336,7 @@ const FileController= {
                 // logic to fetch file by ID from blob 
                 // if (found){
                     // logic to update the file
-                    return res.status(200).json({message:'File update'});
+                    return res.status(200).json({message:'File update'}); // [DANGER] should return correct value, fix with tests
                 // }
                 // else {
                     // return res.status(404).json({message: 'File not found'});

@@ -31,7 +31,7 @@ const UserController = {
             const newUser = await User.create({ user_id, username, fullname, email });
             res.status(201).json(newUser);
         } catch (error) {
-            res.status(400).json({ message: "Error creating user", error: error.message });
+            res.status(500).json({ message: "Error creating user", error: error.message });
         }
     },
 

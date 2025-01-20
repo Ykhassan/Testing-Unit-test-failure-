@@ -101,7 +101,7 @@ const CommentController = {
                 parent_comment = await Comment.findByPk(parent_comment_id)
             }
             //we return the new comment so front-end can auto-refresh the page and add the comment object to the interface
-            return res.status(201).json({ message: "Comment created successfully", comment: newComment, parent_comment: parent_comment })
+            return res.status(201).json({ comment: newComment, parent_comment: parent_comment }) // [NOTE] parent_comment will return undefiend if its not a reply
             //error creating a comment, internal issue within DB
         } catch (error) {
             return res.status(500).json({ message: "Error creating comment", error: error.message });
@@ -173,9 +173,9 @@ const CommentController = {
             //attributes execuldes the attributes from ProjectComments which are comment_id and parent_comment_id
             //can use execlude to execulte set of attributes or attribute [att1, att2, ...] to determine a set of attributes
             const comments = await ProjectComments.findAll({ where: { project_id: project_id }, include: { model: Comment }, attributes: [] })
-            return res.status(200).json({ comments: comments });
+            return res.status(200).json(comments);
         } catch (error) {
-            return res.status(500).json({ message: "Error retrieving comments", error: error.message });
+            return res.status(500).json({ message: "Error fetching comments", error: error.message });
         }
     },
 
@@ -245,10 +245,14 @@ const CommentController = {
     async getCommentById(req, res) {
         try {
             const { comment_id } = req.params;
-            const comment = await Comment.findByPk(comment_id)
-            return res.status(200).json({ message: "Comment returned successfully", comment: comment });
+            const comment = await Comment.findByPk(comment_id);
+            if (comment) {
+                res.status(200).json(comment);
+            } else {
+                res.status(404).json({ message: "Comment not found" });
+            }
         } catch (error) {
-            return res.status(500).json({ message: "Error retrieving the comment", error: error.message });
+            return res.status(500).json({ message: "Error fetching comment", error: error.message });
         }
     },
 
@@ -344,7 +348,10 @@ const CommentController = {
             const { content } = req.body
             const { actions } = req.query;
 
-            const comment = await Comment.findByPk(comment_id)
+            const comment = await Comment.findByPk(comment_id);
+            if(!comment) {
+                return res.status(404).json({ message: "Comment not found" });
+            }
             //check if there is content value or not. based on it, we add/don't add content in changes
             //this step is accounting for when a user likes/dislikes other users comments 
             //if this step is ignored, every upvote or downvote, will wipe the comment content clean
@@ -365,7 +372,7 @@ const CommentController = {
             const updatedComment = await Comment.findByPk(comment_id)
             //return new comment after modification to interface ( handling how will user know if he liked or disliked might be handeled from interface)
             //maybe we return the type of action i.e. remove_up_vote to interface so it can translate the action in the interface
-            return res.status(200).json({ message: "Comment updated successuflly", comment: updatedComment })
+            return res.status(200).json(updatedComment)
 
         } catch (error) {
             return res.status(500).json({ message: "Error updating comment", error: error.message });
@@ -426,11 +433,15 @@ const CommentController = {
         try {
             const { comment_id } = req.params;
             //optional
-            const comment = await Comment.findByPk(comment_id)
-            let placeHolder = comment.content
+            // const comment = await Comment.findByPk(comment_id)
+            // let placeHolder = comment.content
             //need to configure cascade deletion
-            await Comment.destroy({ where: { comment_id: comment.comment_id } })
-            return res.status(200).json({ message: "Comment starting with: " + placeHolder.substring(0, 25) + "... has been deleted successfully" })
+            const deleted = await Comment.destroy({ where: { comment_id: comment_id} })
+            if (deleted) {
+                res.status(204).json({ message: "Comment deleted" });
+            } else {
+                res.status(404).json({ message: "Comment not found" });
+            }
         } catch (error) {
             return res.status(500).json({ message: "Error deleting comment", error: error.message });
         }

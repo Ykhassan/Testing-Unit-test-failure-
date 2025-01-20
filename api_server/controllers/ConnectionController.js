@@ -48,7 +48,7 @@ const ConnectionController = {
             const newConnection = await Connection.create({ user_id, name, cloud_provider,  status, details });
             res.status(201).json(newConnection);
         } catch (error) {
-            res.status(400).json({ message: "Error creating connection", error: error.message });
+            res.status(500).json({ message: "Error creating connection", error: error.message });
         }
     },
 

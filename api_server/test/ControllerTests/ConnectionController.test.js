@@ -31,7 +31,7 @@ describe('ConnectionController', () => {
 
         await ConnectionController.createConnection(mockReq, mockRes);
 
-        expect(mockRes.status).toHaveBeenCalledWith(400);
+        expect(mockRes.status).toHaveBeenCalledWith(500);
         expect(mockRes.json).toHaveBeenCalledWith({ message: 'Error creating connection', error: 'Create failed' });
     })
 

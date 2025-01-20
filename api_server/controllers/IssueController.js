@@ -86,11 +86,10 @@ const IssueController = {
             const status = "open"
             const { title, description, user_id } = req.body
             const newIssue = await Issue.create({ project_id, user_id, title, description, status })
-            return res.status(201).json({ message: "Issue created successfully", issue: newIssue });
+            return res.status(201).json(newIssue);
         } catch (error) {
             return res.status(500).json({ message: "Error creating issue", error: error.message });
         }
-
     },
 
     /**
@@ -161,11 +160,10 @@ const IssueController = {
             const { project_id } = req.params;
             const issues = await Issue.findAll({ where: { project_id: project_id } })
             //return the issues to front end so user could see them
-            return res.status(200).json({ message: "Issues returned succssfully", issues: issues });
+            return res.status(200).json(issues);
         } catch (error) {
             return res.status(500).json({ message: "Error fetching issues", error: error.message });
         }
-
     },
 
     /**
@@ -239,12 +237,14 @@ const IssueController = {
             const { issue_id } = req.params;
             //no need to re-fetch the issue since issueExists has it
             const issue = await Issue.findByPk(issue_id)
-            return res.status(200).json({ message: "Issue returned successfully", issue: issue })
+            if (issue) {
+                res.status(200).json(issue);
+            } else {
+                res.status(404).json({ message: "Issue not found" });
+            }
         } catch (error) {
             return res.status(500).json({ message: "Error fetching issue", error: error.message });
-
         }
-
     },
 
     /**
@@ -346,11 +346,13 @@ const IssueController = {
                 closed_at = new Date(timeInUTC).toISOString();
             }
             //update issue
-            await Issue.update({ title: title, description: description, status: status, closed_at: closed_at }, { where: { issue_id: issue_id } })
-            //return issue after update
-            const updatedIssue = await Issue.findByPk(issue_id)
-            return res.status(200).json({ message: "Issue updated successfully", issue: updatedIssue })
-
+            const [updated] = await Issue.update({ title: title, description: description, status: status, closed_at: closed_at }, { where: { issue_id: issue_id } })
+            if (updated) {
+                const updatedIssue = await Issue.findByPk(issue_id);
+                res.status(200).json(updatedIssue);
+            } else {
+                res.status(404).json({ message: "Issue not found" });
+            }
         } catch (error) {
             return res.status(500).json({ message: "Error updating issue", error: error.message });
         }
@@ -408,14 +410,17 @@ const IssueController = {
     async deleteIssue(req, res) {
         try {
             const { issue_id } = req.params;
-            const issue = await Issue.findByPk(issue_id)
-            const placeHolder = issue.title
-            await Issue.destroy({ where: { issue_id: issue_id } })
-            return res.status(200).json({ message: "Issue starting with " + placeHolder.substring(0, 25) + "... has been deleted succesfully" })
+            // const issue = await Issue.findByPk(issue_id)
+            // const placeHolder = issue.title
+            const deleted = await Issue.destroy({ where: { issue_id: issue_id } })
+            if (deleted) {
+                res.status(204).json({ message: "Issue deleted" });
+            } else {
+                res.status(404).json({ message: "Issue not found" });
+            }
         } catch (error) {
             return res.status(500).json({ message: "Error deleting issue", error: error.message });
         }
-
     },
 
     /**
@@ -517,12 +522,11 @@ const IssueController = {
                 parentComment = await Comment.findByPk(parent_comment_id)
             }
             //parent_comment will be null if ther is no parent comment 
-            return res.status(200).json({ message: "Comment created successfully", comment: createComment, parent_comment: parentComment })
+            return res.status(201).json({ comment: createComment, parent_comment: parentComment })
 
         } catch (error) {
             return res.status(500).json({ message: "Error creating comment for selected issue", error: error.message })
         }
-
     },
 
     /**
@@ -588,7 +592,7 @@ const IssueController = {
             const { issue_id } = req.params;
             //returns all comments objects in current issue using issuecomments table
             const comments = await IssueComments.findAll({ where: { issue_id: issue_id }, include: { model: Comment }, attributes: [] })
-            return res.status(200).json({ message: "Comments returned successfully", comments: comments })
+            return res.status(200).json(comments)
         } catch (error) {
             return res.status(500).json({ message: "Error fetching all comments for selected issue", error: error.message })
         }
@@ -697,6 +701,9 @@ const IssueController = {
             const { actions } = req.query;
 
             const comment = await Comment.findByPk(comment_id)
+            if(!comment) {
+                return res.status(404).json({ message: "Comment not found" });
+            }
 
             //check if there is content value or not. based on it, we add/don't add content in changes
             //this step is accounting for when a user likes/dislikes other users comments 
@@ -720,11 +727,10 @@ const IssueController = {
             //(handling how will user know if he liked or disliked might be handeled from interface)
             //maybe we return the type of action i.e. remove_up_vote to interface so it can translate the action in the interface
             //we can save the action of the query in a parameter and return it to the front end so it can do different animations
-            return res.status(200).json({ message: "Comment updated successuflly", comment: updatedComment })
+            return res.status(200).json(updatedComment)
 
         } catch (error) {
             return res.status(500).json({ message: "Error updating comment", error: error.message });
-
         }
     },
     /**
@@ -783,11 +789,15 @@ const IssueController = {
         try {
             const { comment_id } = req.params;
             //optional
-            const comment = await Comment.findByPk(comment_id)
-            let placeHolder = comment.content
+            // const comment = await Comment.findByPk(comment_id)
+            // let placeHolder = comment.content
             //need to configure cascade deletion
-            await Comment.destroy({ where: { comment_id: comment_id } })
-            return res.status(200).json({ message: "Comment starting with: " + placeHolder.substring(0, 25) + "... has been deleted successfully" })
+            const deleted = await Comment.destroy({ where: { comment_id: comment_id } })
+            if (deleted) {
+                res.status(204).json({ message: "Comment deleted" });
+            } else {
+                res.status(404).json({ message: "Comment not found" });
+            }
         } catch (error) {
             return res.status(500).json({ message: "Error deleting comment for selected issue", error: error.message })
         }
