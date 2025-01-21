@@ -1,0 +1,33 @@
+
+name: Endpoint test
+run-name: Testing ${{github.actor}} code submission 
+on: [push]
+jobs:
+  Run-API:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job details
+        run: |
+          echo "Current job is running on ${{runner.os}} hosted at GitHub"
+          echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Cloning code into the Job
+        uses: actions/checkout@v4
+
+      - name: Starting the services
+        run: |
+          touch .env
+          cat example.env > .env
+          docker compose up -d
+          echo "Services are running"
+          
+      - name: Start Unit test
+        run: docker compose exec api_server npm run test
+        
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Job status
+        run: echo "${{job.status}}"
