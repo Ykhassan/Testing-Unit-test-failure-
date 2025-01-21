@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/UsableSystemsLab/cdhub/graph/badge.svg?token=vIRfeXqXjk)](https://codecov.io/gh/UsableSystemsLab/cdhub)
+
 ## Usage
 
 ```
