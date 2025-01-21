@@ -1,0 +1,29 @@
+name: Test API
+run-name: API Test by ${{github.actor}}
+on: [push]
+jobs:
+  Run-API:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job details
+        run: |
+          echo "Current job is running on ${{runner.os}} hosted at GitHub"
+          echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Cloning code into the Job
+        uses: actions/checkout@v4a
+
+      - name: Starting the services
+        run: |
+          docker compose-up
+          echo "Services are running"
+
+      - name: API health check
+        run: |
+          curl -X 'GET' \
+          'http://localhost:4000/api/health' \
+          -H 'accept: application/json' \
+          -H 'Authorization: Bearer cdhub-api-key-123' 
+        
+      - name: Job status
+        run: echo "${{job.status}}"
