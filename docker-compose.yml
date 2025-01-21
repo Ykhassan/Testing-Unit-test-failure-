@@ -57,6 +57,10 @@ services:
       dockerfile: Dockerfile
       args:
         PORT: ${API_SERVER_PORT}
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - WATCHPACK_POLLING_INTERVAL=1000
     env_file:
       - .env
     image: api_server_image
@@ -77,13 +81,16 @@ services:
       retries: 3
   
   react_app:
-    environment:
-      - REACT_APP_PORT=${REACT_APP_PORT}
     build:
       context: react_app
       dockerfile: Dockerfile
       args:
         PORT: ${REACT_APP_PORT}
+    environment:
+      - REACT_APP_PORT=${REACT_APP_PORT}
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - WATCHPACK_POLLING_INTERVAL=1000
     image: react_app_image
     container_name: react_container
     ports:
