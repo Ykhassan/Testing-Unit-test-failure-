@@ -6,7 +6,9 @@ import FileRoutes from './FileRoutes.js';
 import DeploymentRoutes from './DeploymentRoutes.js';
 import IssueRoutes from './IssueRoutes.js';
 import CommentRoutes from './CommentRoutes.js';
+import AWSRoutes from './AWSRoutes.js'
 import gcpRoutes from './gcpRoutes.js'
+
 
 /**
  * @swagger
@@ -48,7 +50,9 @@ const apiRoutes = (router) => {
     router.use('/deployments', DeploymentRoutes)
     router.use('/issues', IssueRoutes)
     router.use('/comments', CommentRoutes)
-    router.use('/GCP', gcpRoutes)
+    router.use('/aws', AWSRoutes)
+    router.use('/GCP', gcpRoutes)   
+
     // Middleware to catch 404 errors
     router.use((req, res, next) => {
         console.log(`404 Not Found: ${req.url}`);
