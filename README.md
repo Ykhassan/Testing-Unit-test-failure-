@@ -1,3 +1,8 @@
+## API ![Unit test workflow status](https://github.com/UsableSystemsLab/cdhub/actions/workflows/unitTest.yml/badge.svg) [![codecov](https://codecov.io/gh/UsableSystemsLab/cdhub/graph/badge.svg?token=vIRfeXqXjk)](https://codecov.io/gh/UsableSystemsLab/cdhub)
+
+
+
+
 # Project CD-Hub
 
 ## Services
