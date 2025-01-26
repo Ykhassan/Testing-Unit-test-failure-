@@ -12,6 +12,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-pricing": "^3.734.0",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "pg": "^8.13.1",

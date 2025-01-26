@@ -80,3 +80,9 @@ docker exec -it api_server_container npm test
 - `GET /comments/:project_id`: Get all comments on a specific project
 - `PUT /comments/:project_id/:comment_id?actions=[up_vote, remove_up_vote, down_vote, remove_down_vote]`: Update a specific comment by id. An optional query action can be provided.
 - `DELETE /comments/:project_id/:comment_id`: Delete a specific comment by id
+
+### AWS
+
+- `POST /aws/price`: Retrieve the price per unit for a specific AWS resource based on its configuration.
+- `GET /aws/service/:service_code`: Retrieve the available filters for a given AWS service
+- `GET aws/service/:service_code/:config_name`: Retrieve the possible values for a specific configuration filter of an AWS service
