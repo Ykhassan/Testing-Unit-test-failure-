@@ -122,14 +122,14 @@ const AWSController = {
                 throw new Error('No pricing data found for the given configuration.');
             }
 
-            console.log(data.PriceList.length)
+            // console.log(data.PriceList.length)
 
             // Extract the first hit price details
             const priceList = JSON.parse(data.PriceList[0]);
-            console.log(priceList)
+            // console.log(priceList)
             const onDemand = priceList.terms.OnDemand;
             const priceDimensions = Object.values(onDemand)[0].priceDimensions;
-            console.log(priceDimensions)
+            // console.log(priceDimensions)
             const unit = Object.values(priceDimensions)[0].unit;
             const description = Object.values(priceDimensions)[0].description;
             const price_per_unit = Object.values(priceDimensions)[0].pricePerUnit.USD;
@@ -212,7 +212,6 @@ const AWSController = {
             }
 
             // Retrieve the configs associated with this service
-            console.log(data)
             const configs = data.Services[0].AttributeNames;
             return res.status(200).json(configs);
 
