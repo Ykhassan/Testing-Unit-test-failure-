@@ -5,6 +5,7 @@ on: [push]
 jobs:
   Run-API:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Job details
         run: |
