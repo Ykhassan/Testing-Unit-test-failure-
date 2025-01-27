@@ -25,9 +25,7 @@ jobs:
         run: |
             docker ps
             pwd
-            cd api_server
-            npm install jest
-            npm test
+            docker compose -it exec npm test
       # - name: Start Unit test
       #   run: |
       #     docker ps
