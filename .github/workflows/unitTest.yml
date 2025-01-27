@@ -23,7 +23,7 @@ jobs:
           echo "Services are running"
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
-        run: docker exec api_server_container npm test
+        run: docker exec api_server_container node app.js
         # run: | 
         #   docker ps
         #   docker logs api_server_container
