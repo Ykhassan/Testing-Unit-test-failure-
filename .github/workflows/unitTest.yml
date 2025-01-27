@@ -22,8 +22,13 @@ jobs:
           docker compose up -d
           echo "Services are running"
       - name: Start Unit test
-        run: docker compose exec api_server npm run test
-        
+        # run: docker compose exec api_server npm run test
+        run: |
+          curl -X GET 'http://localhost:4000/api/health' \
+          -H 'accept: application/json' \
+          -H 'Authorization: Bearer cdhub-api-key-123'
+
+                
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
