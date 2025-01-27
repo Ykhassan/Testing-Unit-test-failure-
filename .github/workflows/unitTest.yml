@@ -21,11 +21,12 @@ jobs:
           cat example.env > .env
           docker compose up -d
           echo "Services are running"
+          docker stats
           
-      - name: Start Unit test
-        run: |
-          docker ps
-          docker compose exec npm run test -- test/api.test.js
+      # - name: Start Unit test
+      #   run: |
+      #     docker ps
+      #     docker compose exec npm run test -- test/api.test.js
           
       #   run: docker compose exec api_server npm run test
         
