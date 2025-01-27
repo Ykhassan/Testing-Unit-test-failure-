@@ -24,6 +24,8 @@ jobs:
       - name: test 
         run: |
             docker ps
+            pwd
+            cd api_server
             npm test
       # - name: Start Unit test
       #   run: |
