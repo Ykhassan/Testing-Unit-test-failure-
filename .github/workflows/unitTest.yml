@@ -23,16 +23,12 @@ jobs:
           echo "Services are running"
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
-        run: |
-          docker exec api_server_container curl -X GET 'http://localhost:4000/api/health' \
-          -H 'accept: application/json' \
-          -H 'Authorization: Bearer cdhub-api-key-123'
-
+        run: docker compose exec api_server_container npm test.js
                 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
 
-      # - name: Job status
-      #   run: echo "${{job.status}}"
+      - name: Job status
+        run: echo "${{job.status}}"
