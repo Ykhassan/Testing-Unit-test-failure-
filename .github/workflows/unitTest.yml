@@ -24,7 +24,7 @@ jobs:
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
         run: |
-          curl -X GET 'http://localhost:4000/api/health' \
+          docker exec api_server_container curl -X GET 'http://localhost:4000/api/health' \
           -H 'accept: application/json' \
           -H 'Authorization: Bearer cdhub-api-key-123'
 
