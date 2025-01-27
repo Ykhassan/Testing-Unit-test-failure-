@@ -24,7 +24,6 @@ jobs:
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
         run: | 
-          docker compose exec api_server node app.js &
           docker compose exec api_server npm test
         # run: | 
         #   docker ps
