@@ -19,7 +19,7 @@ jobs:
         run: |
           touch .env
           cat example.env > .env
-          docker compose up -d
+          docker compose api_server_container -d
           echo "Services are running"
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
