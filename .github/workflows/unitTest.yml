@@ -26,6 +26,7 @@ jobs:
             docker ps
             pwd
             cd api_server
+            npm install jest
             npm test
       # - name: Start Unit test
       #   run: |
