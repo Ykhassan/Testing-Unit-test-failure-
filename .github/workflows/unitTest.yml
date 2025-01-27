@@ -26,7 +26,8 @@ jobs:
         # run: docker compose exec api_server node test.js
         run: | 
           docker ps
-          docker logs api_server
+          docker logs api_server_container
+          sudo ufw status
           curl https://localhost:4000/docs/
                   
       # - name: Upload coverage reports to Codecov
