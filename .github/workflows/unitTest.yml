@@ -25,7 +25,7 @@ jobs:
         run: |
             docker ps
             pwd
-            docker compose -it exec npm test
+            docker compose exec npm test
       # - name: Start Unit test
       #   run: |
       #     docker ps
