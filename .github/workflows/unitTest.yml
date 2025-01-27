@@ -24,7 +24,7 @@ jobs:
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
         run: | 
-          docker compose exec api_server node app.js
+          docker compose exec api_server node app.js &
           curl https://localhost:4000/docs/
         # run: | 
         #   docker ps
