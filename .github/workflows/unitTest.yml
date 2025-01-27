@@ -23,7 +23,10 @@ jobs:
           echo "Services are running"
           
       - name: Start Unit test
-        run: docker compose exec npm run test -- test/api.test.js
+        run: |
+          docker ps
+          docker compose exec npm run test -- test/api.test.js
+          
       #   run: docker compose exec api_server npm run test
         
       # - name: Upload coverage reports to Codecov
