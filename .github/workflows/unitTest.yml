@@ -24,8 +24,11 @@ jobs:
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
         # run: docker compose exec api_server node test.js
-        run: curl http://localhost:4000/docs/
-                
+        run: | 
+          docker ps
+          docker logs api_server
+          curl https://localhost:4000/docs/
+                  
       # - name: Upload coverage reports to Codecov
       #   uses: codecov/codecov-action@v5
       #   with:
