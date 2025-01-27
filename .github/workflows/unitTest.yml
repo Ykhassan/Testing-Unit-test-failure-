@@ -23,12 +23,12 @@ jobs:
           echo "Services are running"
       - name: Start Unit test
         # run: docker compose exec api_server npm run test
-        # run: docker compose exec api_server node test.js
-        run: | 
-          docker ps
-          docker logs api_server_container
-          sudo ufw status
-          curl https://localhost:4000/docs/
+        run: docker compose exec api_server_container npm test
+        # run: | 
+        #   docker ps
+        #   docker logs api_server_container
+        #   sudo ufw status
+        #   curl https://localhost:4000/docs/
                   
       # - name: Upload coverage reports to Codecov
       #   uses: codecov/codecov-action@v5
